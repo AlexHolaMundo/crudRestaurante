@@ -3,7 +3,7 @@
   <h4 class="text-center">Editar Receta</h4>
   <form
     class="border p-3 rounded-3"
-    action="/guardarDetalle/"
+    action="/actualizarDetalle/"
     method="POST"
     enctype="multipart/form-data"
   >
@@ -98,13 +98,14 @@
         <label for="" class="form-label"> Platillo</label>
         <select
           name="idPlatillo_wt"
+          required
           class="form-control m-1"
           id="idPlatillo_wt"
         >
-          <option value="" class="">-- Seleccione un platillo --</option>
+          <option value="" class="">-- Seleccione una opcion --</option>
           {% for platillo in platillos %}
-          <option value="{{ platillo.idPlatillo_wt }}">
-            {{ platillo.descripcion_wt }}
+          <option value="{{platillo.idPlatillo_wt}}">
+            {{platillo.descripcion_wt}}
           </option>
           {% endfor %}
         </select>

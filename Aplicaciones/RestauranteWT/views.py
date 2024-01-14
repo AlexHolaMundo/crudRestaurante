@@ -31,16 +31,16 @@ def listaPedido(request):
     pedidoBdd=Pedido.objects.all()
     clienteBdd=Cliente.objects.all()
     return render(request, 'listaPedido.html', {'pedidos':pedidoBdd, 'clientes':clienteBdd})
-#Listar Platillo
+# Listar Platillo
 def listaPlatillo(request):
-    platilloBdd=Platillo.objects.all()
-    tipoBdd=Tipo.objects.all()
-    return render(request, 'listaPlatillo.html', {'platillos':platilloBdd , 'tipos':tipoBdd})
+    platilloBdd = Platillo.objects.all()
+    tipoBdd = Tipo.objects.all()
+    return render(request, 'listaPlatillo.html', {'platillos': platilloBdd, 'tipos': tipoBdd})
 #Lista Detalle
 def listaDetalle(request):
     detalleBdd=Detalle.objects.all()
     pedidoBdd=Pedido.objects.all()
-    platilloBdd=Detalle.objects.all()
+    platilloBdd=Platillo.objects.all()
     return render(request, 'listaDetalle.html', {'detalles':detalleBdd, 'pedidos':pedidoBdd, 'platillos':platilloBdd})
 #Lista Receta
 def listaReceta(request):
@@ -304,7 +304,7 @@ def editarPlatillo(request, id):
 def editarDetalle(request, id):
     detalleEditar=Detalle.objects.get(idDetalle_wt=id)
     pedidoBdd=Pedido.objects.all()
-    platilloBdd=Detalle.objects.all()
+    platilloBdd=Platillo.objects.all()
     return render(request, 'editarDetalle.html', {'detalle':detalleEditar, 'pedidos':pedidoBdd, 'platillos':platilloBdd})
 #Editar Receta
 def editarReceta(request, id):

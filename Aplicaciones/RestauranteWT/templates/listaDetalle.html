@@ -94,11 +94,13 @@
           id="idPlatillo_wt"
         >
           <option value="" class="">-- Seleccione una opcion --</option>
-          {% for platillo in platillos %}
-          <option value="{{platillo.idPlatillo_wt}}">
-            {{platillo.nombre_wt}}
+          {% if platillos %} {% for platillo in platillos %}
+          <option value="{{ platillo.idPlatillo_wt }}">
+            {{ platillo.nombre_wt }}
           </option>
-          {% endfor %}
+          {% endfor %} {% else %}
+          <option value="" class="">-- No hay platillos disponibles --</option>
+          {% endif %}
         </select>
       </div>
     </div>
