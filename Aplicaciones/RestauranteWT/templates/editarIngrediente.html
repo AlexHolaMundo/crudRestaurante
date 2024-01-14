@@ -1,0 +1,107 @@
+{#Heredando código#} {% extends "plantilla.html" %} {% block contenido %}
+<div class="container w-50 mt-4 mb-4">
+  <h4 class="text-center">Editar Ingrediente</h4>
+  <form
+    class="border p-3 rounded-3"
+    action="/actualizarIngrediente/"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+    <div class="row">
+      <input
+        type="hidden"
+        required
+        class="form-control m-1"
+        value="{{ingrediente.idIngrediente_wt}}"
+        name="idIngrediente_wt"
+        id="idIngrediente_wt"
+      />
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Nombre</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Leche"
+            value="{{ingrediente.nombre_wt}}"
+            name="nombre_wt"
+            id="nombre_wt"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Tipo</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Lacteo"
+            value="{{ingrediente.tipo_wt}}"
+            name="tipo_wt"
+            id="tipo_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Proveedor</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Lacteos Amazonas"
+            value="{{ingrediente.proveedor_wt}}"
+            name="proveedor_wt"
+            id="proveedor_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Imagen Actual</label>
+          {% if ingrediente.imagen_wt %}
+          <a href="{{ ingrediente.imagen_wt.url }}" target="_blank">
+            <img
+              src="{{ ingrediente.imagen_wt.url }}"
+              alt=""
+              width="50px"
+              height="50px"
+            />
+          </a>
+          {% else %}
+          <p>Sin imagen</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1"
+            >Actualizar Foto (Opcional)</label
+          >
+          <input
+            type="file"
+            accept="image/*"
+            class="form-control m-1"
+            name="imagen_wt"
+            id="imagen_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <center class="mt-2">
+      <button type="submit" name="button" class="btn btn-outline-success">
+        Actualizar</button
+      >&nbsp;&nbsp;
+      <a href="/listaIngrediente/" class="btn btn-outline-dark"> Cancelar </a>
+    </center>
+  </form>
+</div>
+{% endblock contenido %}

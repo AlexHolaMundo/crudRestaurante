@@ -1,0 +1,126 @@
+{#Heredando código#} {% extends "plantilla.html" %} {% block contenido %}
+<div class="container w-50 mt-4 mb-4">
+  <h4 class="text-center">Editar Platillo</h4>
+  <form
+    class="border p-3 rounded-3"
+    action="/actualizarPlatillo/"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+    <div class="row">
+      <input
+        type="hidden"
+        required
+        class="form-control m-1"
+        value="{{platillo.idPlatillo_wt}}"
+        name="idPlatillo_wt"
+        id="idPlatillo_wt"
+      />
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Nombre</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Hamburguesa"
+            value="{{platillo.nombre_wt}}"
+            name="nombre_wt"
+            id="nombre_wt"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Aderezo</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Av. Porcion de papas"
+            value="{{platillo.aderezos_wt}}"
+            name="aderezos_wt"
+            id="aderezos_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Descripcion</label>
+          <textarea
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Hamburguesa con doble queso y mantequilla"
+            name="descripcion_wt"
+            id="descripcion_wt"
+          >
+          {{platillo.descripcion_wt}}
+          </textarea>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Imagen Actual</label>
+          {% if platillo.imagen_wt %}
+          <a href="{{platillo.imagen_wt.url}}" target="_blank">
+            <img
+              src="{{platillo.imagen_wt.url}}"
+              alt=""
+              width="50px"
+              height="50px"
+            />
+          </a>
+          {% else %}
+          <p>Sin imagen</p>
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1"
+            >Actualizar Foto (Opcional)</label
+          >
+          <input
+            type="file"
+            accept="image/*"
+            class="form-control m-1"
+            name="imagen_wt"
+            id="imagen_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label for="" class="form-label"> Tipo</label>
+        <select
+          name="idTipo_wt"
+          required
+          class="form-control m-1"
+          id="idTipo_wt"
+        >
+          <option value="" class="">-- Seleccione una opcion --</option>
+          {% for tipo in tipos %}
+          <option value="{{tipo.idTipo_wt}}">{{tipo.nombre_wt}}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <center class="mt-2">
+      <button type="submit" name="button" class="btn btn-outline-success">
+        Actualizar</button
+      >&nbsp;&nbsp;
+      <a href="/listaPlatillo/" class="btn btn-outline-dark"> Cancelar </a>
+    </center>
+  </form>
+</div>
+<script>
+  document.getElementById('idTipo_wt').value = '{{platillo.tipo_wt.idTipo_wt}}'
+</script>
+{% endblock contenido %}

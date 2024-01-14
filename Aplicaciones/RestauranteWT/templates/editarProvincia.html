@@ -1,0 +1,88 @@
+{#Heredando código#} {% extends "plantilla.html" %} {% block contenido %}
+<div class="container w-50 mt-4 mb-4">
+  <h4 class="text-center">Editar Provincia</h4>
+  <form
+    class="border p-3 rounded-3"
+    action="/actualizarProvincia/"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+    <input
+      type="hidden"
+      required
+      class="form-control m-3"
+      placeholder="ID"
+      value="{{provincia.idProvincia_wt}}"
+      name="idProvincia_wt"
+      id="idProvincia_wt"
+    />
+    <div class="row">
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Nombre</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Ecuador"
+            value="{{provincia.nombre_wt}}"
+            name="nombre_wt"
+            id="nombre_wt"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Codigo Postal</label>
+          <input
+            type="number"
+            required
+            class="form-control m-1"
+            placeholder="Ej. 000000"
+            value="{{provincia.codigoPostal_wt}}"
+            name="codigoPostal_wt"
+            id="codigoPostal_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Region</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Sierra"
+            value="{{provincia.region_wt}}"
+            name="region_wt"
+            id="region_wt"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Habitantes</label>
+          <input
+            type="number"
+            required
+            class="form-control m-1"
+            placeholder="Ej. 1016516"
+            value="{{provincia.habitantes_wt}}"
+            name="habitantes_wt"
+            id="habitantes_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <center class="mt-2">
+      <button type="submit" name="button" class="btn btn-outline-success">
+        Actualizar</button
+      >&nbsp;&nbsp;
+      <a href="/listaProvincia/" class="btn btn-outline-dark"> Cancelar </a>
+    </center>
+  </form>
+</div>
+{% endblock contenido %}

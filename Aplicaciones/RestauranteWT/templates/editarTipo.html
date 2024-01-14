@@ -1,0 +1,88 @@
+{#Heredando código#} {% extends "plantilla.html" %} {% block contenido %}
+<div class="container w-50 mt-4 mb-4">
+  <h4 class="text-center">Actualizar Tipo de comida</h4>
+  <form
+    class="border p-3 rounded-3"
+    action="/actualizarTipo/"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+    <input
+      type="hidden"
+      required
+      class="form-control m-3"
+      placeholder="ID"
+      value="{{tipo.idTipo_wt}}"
+      name="idTipo_wt"
+      id="idTipo_wt"
+    />
+    <div class="row">
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Nombre</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Comida rapida"
+            value="{{tipo.nombre_wt}}"
+            name="nombre_wt"
+            id="nombre_wt"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Descripcion</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Comida rapida"
+            value="{{tipo.descripcion_wt}}"
+            name="descripcion_wt"
+            id="descripcion_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Precio</label>
+          <input
+            type="decimal"
+            required
+            class="form-control m-1"
+            placeholder="Ej. 5.50"
+            value="{{tipo.precio_wt}}"
+            name="precio_wt"
+            id="precio_wt"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Calorias</label>
+          <input
+            type="number"
+            required
+            class="form-control m-1"
+            placeholder="Ej. 30"
+            value="{{tipo.calorias_wt}}"
+            name="calorias_wt"
+            id="calorias_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <center class="mt-2">
+      <button type="submit" name="button" class="btn btn-outline-success">
+        Actualizar</button
+      >&nbsp;&nbsp;
+      <a href="/listaTipo/" class="btn btn-outline-dark"> Cancelar </a>
+    </center>
+  </form>
+</div>
+{% endblock contenido %}

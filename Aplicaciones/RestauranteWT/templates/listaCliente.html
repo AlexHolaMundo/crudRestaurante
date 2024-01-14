@@ -1,0 +1,174 @@
+{% extends "plantilla.html" %} {% block contenido %} {%load static %}
+<div class="container w-50 mt-4 mb-4">
+  <h4 class="text-center">Registrar Cliente</h4>
+  <form
+    class="border p-3 rounded-3"
+    action="/guardarCliente/"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Nombre</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Dario Mena"
+            value=""
+            name="nombre_wt"
+            id="nombre_wt"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Email</label>
+          <input
+            type="email"
+            required
+            class="form-control m-1"
+            placeholder="Ej. alguien@example.com"
+            value=""
+            name="email_wt"
+            id="email_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Direccion</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Av. Example"
+            value=""
+            name="direccion_wt"
+            id="direccion_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Telefono</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. 000 0000 000"
+            value=""
+            name="telefono_wt"
+            id="telefono_wt"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="" class="form-label"> Provincia</label>
+        <select
+          name="idProvincia_wt"
+          required
+          class="form-control m-1"
+          id="idProvincia_wt"
+        >
+          <option value="" class="">-- Seleccione una opcion --</option>
+          {% for provincia in provincias %}
+          <option value="{{provincia.idProvincia_wt}}">
+            {{provincia.nombre_wt}}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <center class="mt-2">
+      <button type="submit" name="button" class="btn btn-outline-primary">
+        Guardar</button
+      >&nbsp;&nbsp;
+      <button type="reset" name="button" class="btn btn-outline-danger">
+        Cancelar
+      </button>
+    </center>
+  </form>
+</div>
+<center class="mt-4 mb-4">
+  <div class="container table-responsive">
+    <h4 class="text-center">Lista de Clientes</h4>
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr class="table-dark">
+          <th class="text-center" scope="col">Id</th>
+          <th class="text-center" scope="col">Nombre</th>
+          <th class="text-center" scope="col">Email</th>
+          <th class="text-center" scope="col">Telefono</th>
+          <th class="text-center" scope="col">Direccion</th>
+          <th class="text-center" scope="col">Provincia</th>
+          <th class="text-center" scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for cliente in clientes %}
+        <tr>
+          <td class="text-center">{{cliente.idCliente_wt}}</td>
+          <td class="text-center">{{cliente.nombre_wt}}</td>
+          <td class="text-center">{{cliente.email_wt}}</td>
+          <td class="text-center">{{cliente.telefono_wt}}</td>
+          <td class="text-center">{{cliente.direccion_wt}}</td>
+          <td class="text-center">{{cliente.provincia_wt.nombre_wt}}</td>
+          <td class="text-center">
+            <a
+              href="/editarCliente/{{cliente.idCliente_wt}}"
+              class="btn btn-outline-info m-1"
+              >Editar</a
+            >
+            <a
+              href="javascript:void(0);"
+              type="button"
+              class="btn btn-outline-warning m-1"
+              onclick="eliminarCliente('/eliminarCliente/{{cliente.idCliente_wt}}')"
+              >Eliminar</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</center>
+<script type="text/javascript">
+  function eliminarCliente(url) {
+    iziToast.question({
+      timeout: 15000,
+      close: true,
+      overlay: true,
+      displayMode: 'once',
+      id: 'question',
+      zindex: 999,
+      title: 'CONFIRMACIÓN',
+      message: '¿Está seguro de eliminar el cliente seleccionado?',
+      position: 'center',
+      buttons: [
+        [
+          '<button><b>SI</b></button>',
+          function (instance, toast) {
+            instance.hide({ transitionOut: 'fadeOut' }, toast, 'button')
+            window.location.href = url
+          },
+          true,
+        ],
+        [
+          '<button>NO</button>',
+          function (instance, toast) {
+            instance.hide({ transitionOut: 'fadeOut' }, toast, 'button')
+          },
+        ],
+      ],
+    })
+  }
+</script>
+{% endblock contenido %}

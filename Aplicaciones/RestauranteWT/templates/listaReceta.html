@@ -1,0 +1,193 @@
+{% extends "plantilla.html" %} {% block contenido %} {%load static %}
+<div class="container w-50 mt-4 mb-4">
+  <h4 class="text-center">Registrar Receta</h4>
+  <form
+    class="border p-3 rounded-3"
+    action="/guardarReceta/"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Nombre</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Salchipapas"
+            value=""
+            name="nombre_wt"
+            id="nombre_wt"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Origen</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Colombiano"
+            value=""
+            name="origen_wt"
+            id="origen_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Recomendaciones</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Ninguno"
+            value=""
+            name="recomendaciones_wt"
+            id="recomendaciones_wt"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Chef Encargado</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Alguien Genial"
+            value=""
+            name="chefEncargado_wt"
+            id="chefEncargado_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label for="" class="form-label"> Ingrediente</label>
+        <select
+          name="idIngrediente_wt"
+          required
+          class="form-control m-1"
+          id="idIngrediente_wt"
+        >
+          <option value="" class="">-- Seleccione una opcion --</option>
+          {% for ingrediente in ingredientes %}
+          <option value="{{ingrediente.idIngrediente_wt}}">
+            {{ingrediente.nombre_wt}}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="" class="form-label"> Platillo</label>
+        <select
+          name="idPlatillo_wt"
+          required
+          class="form-control m-1"
+          id="idPlatillo_wt"
+        >
+          <option value="" class="">-- Seleccione una opcion --</option>
+          {% for platillo in platillos %}
+          <option value="{{platillo.idPlatillo_wt}}">
+            {{platillo.nombre_wt}}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <center class="mt-2">
+      <button type="submit" name="button" class="btn btn-outline-primary">
+        Guardar</button
+      >&nbsp;&nbsp;
+      <button type="reset" name="button" class="btn btn-outline-danger">
+        Cancelar
+      </button>
+    </center>
+  </form>
+</div>
+<center class="mt-4 mb-4">
+  <div class="container table-responsive">
+    <h4 class="text-center">Lista de Recetas</h4>
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr class="table-dark">
+          <th class="text-center" scope="col">Id</th>
+          <th class="text-center" scope="col">Nombre</th>
+          <th class="text-center" scope="col">Origen</th>
+          <th class="text-center" scope="col">Recomendaciones</th>
+          <th class="text-center" scope="col">Chef Encargado</th>
+          <th class="text-center" scope="col">Ingrediente</th>
+          <th class="text-center" scope="col">Platillo</th>
+          <th class="text-center" scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for receta in recetas %}
+        <tr>
+          <td class="text-center">{{receta.idReceta_wt}}</td>
+          <td class="text-center">{{receta.nombre_wt}}</td>
+          <td class="text-center">{{receta.origen_wt}}</td>
+          <td class="text-center">{{receta.recomendaciones_wt}}</td>
+          <td class="text-center">{{receta.chefEncargado_wt}}</td>
+          <td class="text-center">{{receta.ingrediente_wt.nombre_wt}}</td>
+          <td class="text-center">{{receta.platillo_wt.nombre_wt}}</td>
+
+          <td class="text-center">
+            <a
+              href="/editarReceta/{{receta.idReceta_wt}}"
+              class="btn btn-outline-info m-1"
+              >Editar</a
+            >
+            <a
+              href="javascript:void(0);"
+              type="button"
+              class="btn btn-outline-warning m-1"
+              onclick="eliminarReceta('/eliminarReceta/{{receta.idReceta_wt}}')"
+              >Eliminar</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</center>
+<script type="text/javascript">
+  function eliminarReceta(url) {
+    iziToast.question({
+      timeout: 15000,
+      close: true,
+      overlay: true,
+      displayMode: 'once',
+      id: 'question',
+      zindex: 999,
+      title: 'CONFIRMACIÓN',
+      message: '¿Está seguro de eliminar la receta seleccionada?',
+      position: 'center',
+      buttons: [
+        [
+          '<button><b>SI</b></button>',
+          function (instance, toast) {
+            instance.hide({ transitionOut: 'fadeOut' }, toast, 'button')
+            window.location.href = url
+          },
+          true,
+        ],
+        [
+          '<button>NO</button>',
+          function (instance, toast) {
+            instance.hide({ transitionOut: 'fadeOut' }, toast, 'button')
+          },
+        ],
+      ],
+    })
+  }
+</script>
+{% endblock contenido %}

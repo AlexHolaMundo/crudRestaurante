@@ -1,0 +1,191 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Importacion de Fuentes Tipograficas-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=PT+Sans+Narrow:wght@400;700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Condensed:wght@400;600;900&display=swap"
+      rel="stylesheet"
+    />
+    <!--Importacion de Bootstrap-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <!--Importacion de css estilos archivos estaticos-->
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}" />
+    <!--Importacion de Izi toast alertas-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css"
+      integrity="sha512-DIW4FkYTOxjCqRt7oS9BFO+nVOwDL4bzukDyDtMO7crjUZhwpyrWBFroq+IqRe6VnJkTpRAS6nhDvf0w+wHmxg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"
+      integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!--Importacion de cdn jquery-->
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+    <!--Importacion de Librerias-->
+    <script src="{% static 'librerias/jquery-validate/jquery.validate.js'%}"></script>
+    <!--Importacion de data tables-->
+    <link
+      rel="stylesheet"
+      href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css"
+    />
+    <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"
+    ></script>
+    <title>Restaurate</title>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-dark"
+      aria-label="Ninth navbar example"
+    >
+      <div class="container-xl">
+        <a class="navbar-brand" href="/">Restaurante</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarsExample07XL"
+          aria-controls="navbarsExample07XL"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExample07XL">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="/listaProvincia">Provincias</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/listaTipo">Tipos de Comida</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/listaIngrediente">Ingrediente</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/listaCliente">Clientes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/listaPedido">Pedidos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/listaPlatillo">Platillos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/listaDetalle">Detalles</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/listaReceta">Recetas</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    {% block contenido %}{% endblock %}
+    <div class="footer fixed-bottom w-100">
+      <div class="row">
+        <div class="col-md-4">
+          <h4><strong>&nbsp;&nbsp;&nbsp;&nbsp; CONTACTOS</strong></h4>
+          <ul>
+            <strong>Celular:</strong>
+            0987002084
+          </ul>
+          <ul>
+            <strong>Email:</strong>
+            alexgdyt22@gmail.com
+          </ul>
+          <ul>
+            <strong>GitHub:</strong>
+            AlexHolaMundo
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h4><strong>&nbsp;&nbsp;&nbsp;&nbsp; SERVICIOS</strong></h4>
+          <ul>
+            Aplicaciones Web
+          </ul>
+          <ul>
+            Aplicaciones Móviles
+          </ul>
+          <ul>
+            Aplicaciones de Escritorio
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h4>
+            <strong>&nbsp;&nbsp;&nbsp;&nbsp; HORARIOS DE ATENCIÓN</strong>
+          </h4>
+          <ul>
+            <strong>Días Particulares:</strong>
+            9:00 AM - 7:00 PM
+          </ul>
+          <ul>
+            <strong>Fines de Semana:</strong>
+            10:00 AM - 5:00 PM
+          </ul>
+          <ul>
+            <strong>Feriados:</strong>
+            No Trabajamos
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <p class="text-center mb-0">
+          <strong>Created by:</strong> AlexHolaMundo =)
+        </p>
+      </div>
+    </div>
+    {% if messages %} {% for message in messages %}
+    <script>
+      iziToast.success({
+        title: 'ATENCION',
+        message: '{{message}}',
+        position: 'topRight',
+      })
+    </script>
+    {% endfor %} {% endif %}
+  </body>
+</html>

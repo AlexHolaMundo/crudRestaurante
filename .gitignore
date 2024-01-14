@@ -1,0 +1,29 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Django related
+*.log
+db.sqlite3
+media/
+
+# Secret key
+secret_key.txt
+
+# Visual Studio Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# macOS
+.DS_Store
+
+# Compiled Python files
+*.pyc
+
+# Python environment
+venv/
+env/

@@ -1,0 +1,109 @@
+{#Heredando código#} {% extends "plantilla.html" %} {% block contenido %}
+<div class="container w-50 mt-4 mb-4">
+  <h4 class="text-center">Editar Ingrediente</h4>
+  <form
+    class="border p-3 rounded-3"
+    action="/actualizarCliente/"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+    <div class="row">
+      <input
+        type="hidden"
+        required
+        class="form-control m-1"
+        value="{{cliente.idCliente_wt}}"
+        name="idCliente_wt"
+        id="idCliente_wt"
+      />
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Nombre</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Dario Mena"
+            value="{{cliente.nombre_wt}}"
+            name="nombre_wt"
+            id="nombre_wt"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Email</label>
+          <input
+            type="email"
+            required
+            class="form-control m-1"
+            placeholder="Ej. alguien@example.com"
+            value="{{cliente.email_wt}}"
+            name="email_wt"
+            id="email_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Direccion</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Av. Example"
+            value="{{cliente.direccion_wt}}"
+            name="direccion_wt"
+            id="direccion_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Telefono</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. 000 0000 000"
+            value="{{cliente.telefono_wt}}"
+            name="telefono_wt"
+            id="telefono_wt"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="" class="form-label"> Provincia</label>
+        <select
+          name="idProvincia_wt"
+          required
+          class="form-control m-1"
+          id="idProvincia_wt"
+        >
+          <option value="" class="">-- Seleccione una opcion --</option>
+          {% for provincia in provincias %}
+          <option value="{{provincia.idProvincia_wt}}">
+            {{provincia.nombre_wt}}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <center class="mt-2">
+      <button type="submit" name="button" class="btn btn-outline-success">
+        Actualizar</button
+      >&nbsp;&nbsp;
+      <a href="/listaCliente/" class="btn btn-outline-dark"> Cancelar </a>
+    </center>
+  </form>
+</div>
+<script>
+  document.getElementById('idProvincia_wt').value =
+    '{{cliente.provincia_wt.idProvincia_wt}}'
+</script>
+{% endblock contenido %}

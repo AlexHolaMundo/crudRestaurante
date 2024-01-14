@@ -1,0 +1,127 @@
+{#Heredando código#} {% extends "plantilla.html" %} {% block contenido %}
+<div class="container w-50 mt-4 mb-4">
+  <h4 class="text-center">Editar Receta</h4>
+  <form
+    class="border p-3 rounded-3"
+    action="/actualizarReceta/"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+    <div class="row">
+      <input
+        type="hidden"
+        required
+        class="form-control m-1"
+        value="{{receta.idReceta_wt}}"
+        name="idReceta_wt"
+        id="idReceta_wt"
+      />
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Nombre</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Menestra de Lenteja"
+            value="{{receta.nombre_wt}}"
+            name="nombre_wt"
+            id="nombre_wt"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Origen</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Colombiano"
+            value="{{receta.origen_wt}}"
+            name="origen_wt"
+            id="origen_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Recomendaciones</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Av. Example"
+            value="{{receta.recomendaciones_wt}}"
+            name="recomendaciones_wt"
+            id="recomendaciones_wt"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Chef Encargado</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Alguien Genial"
+            value="{{receta.chefEncargado_wt}}"
+            name="chefEncargado_wt"
+            id="chefEncargado_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label for="" class="form-label"> Ingrediente</label>
+        <select
+          name="idIngrediente_wt"
+          required
+          class="form-control m-1"
+          id="idIngrediente_wt"
+        >
+          <option value="" class="">-- Seleccione una opcion --</option>
+          {% for ingrediente in ingredientes %}
+          <option value="{{ingrediente.idIngrediente_wt}}">
+            {{ingrediente.nombre_wt}}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="" class="form-label"> Platillo</label>
+        <select
+          name="idPlatillo_wt"
+          required
+          class="form-control m-1"
+          id="idPlatillo_wt"
+        >
+          <option value="" class="">-- Seleccione una opcion --</option>
+          {% for platillo in platillos %}
+          <option value="{{platillo.idPlatillo_wt}}">
+            {{platillo.nombre_wt}}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <center class="mt-2">
+      <button type="submit" name="button" class="btn btn-outline-success">
+        Actualizar</button
+      >&nbsp;&nbsp;
+      <a href="/listaReceta" class="btn btn-outline-dark"> Cancelar </a>
+    </center>
+  </form>
+</div>
+<script>
+  document.getElementById('idIngrediente_wt').value =
+    '{{receta.ingrediente_wt.idIngrediente_wt}}'
+  document.getElementById('idPlatillo_wt').value =
+    '{{receta.platillo_wt.idPlatillo_wt}}'
+</script>
+{% endblock contenido %}

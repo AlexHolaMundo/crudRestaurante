@@ -1,0 +1,192 @@
+{% extends "plantilla.html" %} {% block contenido %} {%load static %}
+<div class="container w-50 mt-4 mb-4">
+  <h4 class="text-center">Registrar Detalle</h4>
+  <form
+    class="border p-3 rounded-3"
+    action="/guardarDetalle/"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Cantidad</label>
+          <input
+            type="number"
+            required
+            class="form-control m-1"
+            placeholder="Ej.2 "
+            value=""
+            name="cantidad_wt"
+            id="cantidad_wt"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Precio Unitario</label>
+          <input
+            type="number"
+            required
+            class="form-control m-1"
+            placeholder="Ej. 2.50"
+            value=""
+            name="precio_unitario_wt"
+            id="precio_unitario_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Subtotal</label>
+          <input
+            type="number"
+            required
+            class="form-control m-1"
+            placeholder="Ej. 5.00"
+            value=""
+            name="subtotal_wt"
+            id="subtotal_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Observaciones</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Ninguna"
+            value=""
+            name="observaciones_wt"
+            id="observaciones_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label for="" class="form-label"> Pedido</label>
+        <select
+          name="idPedido_wt"
+          required
+          class="form-control m-1"
+          id="idPedido_wt"
+        >
+          <option value="" class="">-- Seleccione una opcion --</option>
+          {% for pedido in pedidos %}
+          <option value="{{pedido.idPedido_wt}}">{{pedido.estado_wt}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="" class="form-label"> Platillo</label>
+        <select
+          name="idPlatillo_wt"
+          required
+          class="form-control m-1"
+          id="idPlatillo_wt"
+        >
+          <option value="" class="">-- Seleccione una opcion --</option>
+          {% for platillo in platillos %}
+          <option value="{{platillo.idPlatillo_wt}}">
+            {{platillo.nombre_wt}}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <center class="mt-2">
+      <button type="submit" name="button" class="btn btn-outline-primary">
+        Guardar</button
+      >&nbsp;&nbsp;
+      <button type="reset" name="button" class="btn btn-outline-danger">
+        Cancelar
+      </button>
+    </center>
+  </form>
+</div>
+<center class="mt-4 mb-4">
+  <div class="container table-responsive">
+    <h4 class="text-center">Lista de Detalles</h4>
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr class="table-dark">
+          <th class="text-center" scope="col">Id</th>
+          <th class="text-center" scope="col">Cantidad</th>
+          <th class="text-center" scope="col">Precio Unitario</th>
+          <th class="text-center" scope="col">Subtotal</th>
+          <th class="text-center" scope="col">Observaciones</th>
+          <th class="text-center" scope="col">Pedido</th>
+          <th class="text-center" scope="col">Platillo</th>
+          <th class="text-center" scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for detalle in detalles %}
+        <tr>
+          <td class="text-center">{{detalle.idDetalle_wt}}</td>
+          <td class="text-center">{{detalle.cantidad_wt}}</td>
+          <td class="text-center">{{detalle.precio_unitario_wt}}</td>
+          <td class="text-center">{{detalle.subtotal_wt}}</td>
+          <td class="text-center">{{detalle.observaciones_wt}}</td>
+          <td class="text-center">{{detalle.pedido_wt.estado_wt}}</td>
+          <td class="text-center">{{detalle.platillo_wt.descripcion_wt}}</td>
+          <td class="text-center">
+            <a
+              href="/editarDetalle/{{detalle.idDetalle_wt}}"
+              class="btn btn-outline-info m-1"
+              >Editar</a
+            >
+            <a
+              href="javascript:void(0);"
+              type="button"
+              class="btn btn-outline-warning m-1"
+              onclick="eliminarDetalle('/eliminarDetalle/{{detalle.idDetalle_wt}}')"
+              >Eliminar</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</center>
+<script type="text/javascript">
+  function eliminarDetalle(url) {
+    iziToast.question({
+      timeout: 15000,
+      close: true,
+      overlay: true,
+      displayMode: 'once',
+      id: 'question',
+      zindex: 999,
+      title: 'CONFIRMACIÓN',
+      message: '¿Está seguro de eliminar el detalle seleccionado?',
+      position: 'center',
+      buttons: [
+        [
+          '<button><b>SI</b></button>',
+          function (instance, toast) {
+            instance.hide({ transitionOut: 'fadeOut' }, toast, 'button')
+            window.location.href = url
+          },
+          true,
+        ],
+        [
+          '<button>NO</button>',
+          function (instance, toast) {
+            instance.hide({ transitionOut: 'fadeOut' }, toast, 'button')
+          },
+        ],
+      ],
+    })
+  }
+</script>
+{% endblock contenido %}

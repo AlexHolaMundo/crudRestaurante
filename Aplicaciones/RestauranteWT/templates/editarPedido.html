@@ -1,0 +1,109 @@
+{#Heredando código#} {% extends "plantilla.html" %} {% block contenido %}
+<div class="container w-50 mt-4 mb-4">
+  <h4 class="text-center">Editar Pedido</h4>
+  <form
+    class="border p-3 rounded-3"
+    action="/actualizarPedido/"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+    <div class="row">
+      <input
+        type="hidden"
+        required
+        class="form-control m-1"
+        value="{{pedido.idPedido_wt}}"
+        name="idPedido_wt"
+        id="idPedido_wt"
+      />
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Fecha del Pedido</label>
+          <input
+            type="date"
+            required
+            class="form-control m-1"
+            value="{{pedido.fechaPedido_wt | date:'Y-m-d'}}"
+            name="fechaPedido_wt"
+            id="fechaPedido_wt"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Total</label>
+          <input
+            type="decimal"
+            required
+            class="form-control m-1"
+            placeholder="Ej. 10.99"
+            value="{{pedido.total_wt}}"
+            name="total_wt"
+            id="total_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Estado</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Pendiente"
+            value="{{pedido.estado_wt}}"
+            name="estado_wt"
+            id="estado_wt"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Forma de Pago</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Transferencia Bancaria"
+            value="{{pedido.metodo_pago_wt}}"
+            name="metodo_pago_wt"
+            id="metodo_pago_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label for="" class="form-label">Cliente</label>
+        <select
+          name="idCliente_wt"
+          required
+          class="form-control m-1"
+          id="idCliente_wt"
+        >
+          <option value="" class="">-- Seleccione una opcion --</option>
+          {% for cliente in clientes %}
+          <option value="{{cliente.idCliente_wt}}">
+            {{cliente.nombre_wt}}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <center class="mt-2">
+      <button type="submit" name="button" class="btn btn-outline-success">
+        Actualizar</button
+      >&nbsp;&nbsp;
+      <a href="/listaPedido/" class="btn btn-outline-dark"> Cancelar </a>
+    </center>
+  </form>
+</div>
+<script>
+  document.getElementById('idCliente_wt').value =
+    '{{pedido.cliente_wt.idCliente_wt}}'
+</script>
+{% endblock contenido %}

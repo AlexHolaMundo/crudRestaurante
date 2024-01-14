@@ -1,0 +1,127 @@
+{#Heredando código#} {% extends "plantilla.html" %} {% block contenido %}
+<div class="container w-50 mt-4 mb-4">
+  <h4 class="text-center">Editar Receta</h4>
+  <form
+    class="border p-3 rounded-3"
+    action="/guardarDetalle/"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+    <div class="row">
+      <input
+        type="hidden"
+        required
+        class="form-control m-3"
+        placeholder="ID"
+        value="{{detalle.idDetalle_wt}}"
+        name="idDetalle_wt"
+        id="idDetalle_wt"
+      />
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Cantidad</label>
+          <input
+            type="number"
+            required
+            class="form-control m-1"
+            placeholder="Ej.2 "
+            value="{{detalle.cantidad_wt}}"
+            name="cantidad_wt"
+            id="cantidad_wt"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Precio Unitario</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. 2.50"
+            value="{{detalle.precio_unitario_wt}}"
+            name="precio_unitario_wt"
+            id="precio_unitario_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Subtotal</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. 5.00"
+            value="{{detalle.subtotal_wt}}"
+            name="subtotal_wt"
+            id="subtotal_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Observaciones</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Ninguna"
+            value="{{detalle.observaciones_wt}}"
+            name="observaciones_wt"
+            id="observaciones_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label for="" class="form-label"> Pedido</label>
+        <select
+          name="idPedido_wt"
+          required
+          class="form-control m-1"
+          id="idPedido_wt"
+        >
+          <option value="" class="">-- Seleccione una opcion --</option>
+          {% for pedido in pedidos %}
+          <option value="{{pedido.idPedido_wt}}">{{pedido.estado_wt}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="" class="form-label"> Platillo</label>
+        <select
+          name="idPlatillo_wt"
+          class="form-control m-1"
+          id="idPlatillo_wt"
+        >
+          <option value="" class="">-- Seleccione un platillo --</option>
+          {% for platillo in platillos %}
+          <option value="{{ platillo.idPlatillo_wt }}">
+            {{ platillo.descripcion_wt }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <center class="mt-2">
+      <button type="submit" name="button" class="btn btn-outline-success">
+        Actualizar</button
+      >&nbsp;&nbsp;
+      <a href="/listaDetalle/" class="btn btn-outline-dark"> Cancelar </a>
+    </center>
+  </form>
+</div>
+<script>
+  document.getElementById('idPedido_wt').value =
+    '{{detalle.pedido_wt.idPedido_wt}}'
+  document.getElementById('idPlatillo_wt').value =
+    '{{detalle.platillo_wt.idPlatillo_wt}}'
+</script>
+{% endblock contenido %}
