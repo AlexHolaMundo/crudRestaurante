@@ -1,6 +1,6 @@
 {#Heredando código#} {% extends "plantilla.html" %} {% block contenido %}
 <div class="container w-50 mt-4 mb-4">
-  <h4 class="text-center">Editar Receta</h4>
+  <h2 class="text-center">Editar Receta</h2>
   <form
     class="border p-3 rounded-3"
     action="/actualizarDetalle/"
@@ -48,7 +48,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
         <div class="m-1">
           <label for="" class="form-label m-1">Subtotal</label>
           <input
@@ -62,9 +62,8 @@
           />
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
+
+      <div class="col-md-6">
         <div class="m-1">
           <label for="" class="form-label m-1">Observaciones</label>
           <input
@@ -113,9 +112,11 @@
     </div>
     <center class="mt-2">
       <button type="submit" name="button" class="btn btn-outline-success">
-        Actualizar</button
+        Actualizar <i class="fa-solid fa-arrows-rotate"></i></button
       >&nbsp;&nbsp;
-      <a href="/listaDetalle/" class="btn btn-outline-dark"> Cancelar </a>
+      <a href="/listaDetalle/" class="btn btn-outline-dark">
+        Cancelar <i class="fa-solid fa-right-left"></i
+      ></a>
     </center>
   </form>
 </div>

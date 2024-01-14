@@ -1,3 +1,44 @@
 {#Heredando código#} {% extends "./plantilla.html" %} {% block contenido %}
-<h1>Inicio</h1>
+<h1 class="text-center mt-4">Bienvenido</h1>
+<h4 class="text-center">Seleccione una opcion</h4>
+<div class="contenedor-botones">
+  <div class="row">
+    <a class="col-md-4 botones-home" href="/listaProvincia">
+      <i class="fa-solid fa-map"></i> <br />Provincias
+    </a>
+    <a class="col-md-4 botones-home" href="/listaTipo">
+      <i class="fa-solid fa-bowl-food"></i> <br />
+      Tipos de Comida
+    </a>
+    <a class="col-md-4 botones-home" href="/listaIngrediente">
+      <i class="fa-solid fa-cubes-stacked"></i> <br />
+      Ingredientes
+    </a>
+  </div>
+
+  <div class="row">
+    <a class="col-md-4 botones-home" href="/listaCliente">
+      <i class="fa-solid fa-users"></i> <br />
+      Clientes</a
+    >
+    <a class="col-md-4 botones-home" href="/listaPedido">
+      <i class="fa-solid fa-bell-concierge"></i> <br />Pedidos</a
+    >
+    <a class="col-md-4 botones-home" href="/listaPlatillo"
+      ><i class="fa-solid fa-plate-wheat"></i> <br />
+      Platillos
+    </a>
+  </div>
+
+  <div class="row">
+    <a class="col-md-6 botones-home" href="/listaDetalle">
+      <i class="fa-solid fa-receipt"></i> <br />
+      Detalles</a
+    >
+    <a class="col-md-6 botones-home" href="/listaReceta">
+      <i class="fa-solid fa-sheet-plastic"></i> <br />
+      Recetas</a
+    >
+  </div>
+</div>
 {% endblock contenido %}

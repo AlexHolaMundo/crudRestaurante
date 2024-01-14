@@ -1,75 +1,16 @@
 {% extends "plantilla.html" %} {% block contenido %} {%load static %}
 <div class="container w-50 mt-4 mb-4">
-  <h4 class="text-center">Registrar Detalle</h4>
+  <h2 class="text-center">
+    Registrar Detalle <i class="fa-solid fa-receipt"></i>
+  </h2>
   <form
     class="border p-3 rounded-3"
     action="/guardarDetalle/"
     method="POST"
     enctype="multipart/form-data"
+    id="formDetalle"
   >
     {% csrf_token %}
-    <div class="row">
-      <div class="col-md-6">
-        <div class="m-1">
-          <label for="" class="form-label m-1">Cantidad</label>
-          <input
-            type="number"
-            required
-            class="form-control m-1"
-            placeholder="Ej.2 "
-            value=""
-            name="cantidad_wt"
-            id="cantidad_wt"
-          />
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="m-1">
-          <label for="" class="form-label m-1">Precio Unitario</label>
-          <input
-            type="number"
-            required
-            class="form-control m-1"
-            placeholder="Ej. 2.50"
-            value=""
-            name="precio_unitario_wt"
-            id="precio_unitario_wt"
-          />
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="m-1">
-          <label for="" class="form-label m-1">Subtotal</label>
-          <input
-            type="number"
-            required
-            class="form-control m-1"
-            placeholder="Ej. 5.00"
-            value=""
-            name="subtotal_wt"
-            id="subtotal_wt"
-          />
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="m-1">
-          <label for="" class="form-label m-1">Observaciones</label>
-          <input
-            type="text"
-            required
-            class="form-control m-1"
-            placeholder="Ej. Ninguna"
-            value=""
-            name="observaciones_wt"
-            id="observaciones_wt"
-          />
-        </div>
-      </div>
-    </div>
     <div class="row">
       <div class="col-md-6">
         <label for="" class="form-label"> Pedido</label>
@@ -104,29 +45,94 @@
         </select>
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Cantidad</label>
+          <input
+            type="number"
+            required
+            class="form-control m-1"
+            placeholder="Ej.2 "
+            value=""
+            name="cantidad_wt"
+            id="cantidad_wt"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Precio Unitario</label>
+          <input
+            type="number"
+            required
+            class="form-control m-1"
+            placeholder="Ej. 2.50"
+            value=""
+            name="precio_unitario_wt"
+            id="precio_unitario_wt"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Subtotal</label>
+          <input
+            type="number"
+            required
+            class="form-control m-1"
+            placeholder="Ej. 5.00"
+            value=""
+            name="subtotal_wt"
+            id="subtotal_wt"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="m-1">
+          <label for="" class="form-label m-1">Observaciones</label>
+          <input
+            type="text"
+            required
+            class="form-control m-1"
+            placeholder="Ej. Ninguna"
+            value=""
+            name="observaciones_wt"
+            id="observaciones_wt"
+          />
+        </div>
+      </div>
+    </div>
+
     <center class="mt-2">
       <button type="submit" name="button" class="btn btn-outline-primary">
-        Guardar</button
+        Guardar <i class="fa-regular fa-floppy-disk"></i></button
       >&nbsp;&nbsp;
       <button type="reset" name="button" class="btn btn-outline-danger">
-        Cancelar
+        Cancelar <i class="fa-regular fa-window-close"></i>
       </button>
     </center>
   </form>
 </div>
 <center class="mt-4 mb-4">
   <div class="container table-responsive">
-    <h4 class="text-center">Lista de Detalles</h4>
-    <table class="table table-striped table-bordered table-hover">
+    <h2 class="text-center">Lista de Detalles</h2>
+    <table
+      class="table table-striped table-bordered table-hover"
+      id="tbDetalle"
+    >
       <thead>
         <tr class="table-dark">
           <th class="text-center" scope="col">Id</th>
+          <th class="text-center" scope="col">Pedido</th>
+          <th class="text-center" scope="col">Platillo</th>
           <th class="text-center" scope="col">Cantidad</th>
           <th class="text-center" scope="col">Precio Unitario</th>
           <th class="text-center" scope="col">Subtotal</th>
           <th class="text-center" scope="col">Observaciones</th>
-          <th class="text-center" scope="col">Pedido</th>
-          <th class="text-center" scope="col">Platillo</th>
           <th class="text-center" scope="col">Acciones</th>
         </tr>
       </thead>
@@ -134,25 +140,25 @@
         {% for detalle in detalles %}
         <tr>
           <td class="text-center">{{detalle.idDetalle_wt}}</td>
+          <td class="text-center">{{detalle.observaciones_wt}}</td>
+          <td class="text-center">{{detalle.pedido_wt.estado_wt}}</td>
           <td class="text-center">{{detalle.cantidad_wt}}</td>
           <td class="text-center">{{detalle.precio_unitario_wt}}</td>
           <td class="text-center">{{detalle.subtotal_wt}}</td>
-          <td class="text-center">{{detalle.observaciones_wt}}</td>
-          <td class="text-center">{{detalle.pedido_wt.estado_wt}}</td>
           <td class="text-center">{{detalle.platillo_wt.descripcion_wt}}</td>
           <td class="text-center">
             <a
               href="/editarDetalle/{{detalle.idDetalle_wt}}"
               class="btn btn-outline-info m-1"
-              >Editar</a
-            >
+              >Editar <i class="fa-regular fa-pen-to-square"></i
+            ></a>
             <a
               href="javascript:void(0);"
               type="button"
               class="btn btn-outline-warning m-1"
               onclick="eliminarDetalle('/eliminarDetalle/{{detalle.idDetalle_wt}}')"
-              >Eliminar</a
-            >
+              >Eliminar <i class="fa-solid fa-trash"></i
+            ></a>
           </td>
         </tr>
         {% endfor %}
@@ -190,5 +196,103 @@
       ],
     })
   }
+</script>
+<script>
+  $('#formDetalle').validate({
+    rules: {
+      idPedido_wt: {
+        required: true,
+      },
+      idPlatillo_wt: {
+        required: true,
+      },
+      cantidad_wt: {
+        required: true,
+        number: true,
+      },
+      precio_unitario_wt: {
+        required: true,
+        number: true,
+      },
+      subtotal_wt: {
+        required: true,
+        number: true,
+      },
+      observaciones_wt: {
+        required: true,
+        minlength: 3,
+        maxlength: 50,
+      },
+    },
+    messages: {
+      idPedido_wt: {
+        required: 'Seleccione un pedido',
+      },
+      idPlatillo_wt: {
+        required: 'Seleccione un platillo',
+      },
+      cantidad_wt: {
+        required: 'Ingrese la cantidad',
+        number: 'Ingrese solo números',
+      },
+      precio_unitario_wt: {
+        required: 'Ingrese el precio unitario',
+        number: 'Ingrese solo números',
+      },
+      subtotal_wt: {
+        required: 'Ingrese el subtotal',
+        number: 'Ingrese solo números',
+      },
+      observaciones_wt: {
+        required: 'Ingrese las observaciones',
+        minlength: 'Ingrese al menos 3 caracteres',
+        maxlength: 'Ingrese menos de 50 caracteres',
+      },
+    },
+  })
+</script>
+<script>
+  let table = $('#tbDetalle').DataTable({
+    searching: true,
+    fixedHeader: true,
+    paging: true,
+    info: true,
+    pageLength: 5,
+    language: {
+      url: 'https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json',
+    },
+    dom: 'Bfrtip',
+    buttons: [
+      {
+        extend: 'pdfHtml5',
+        text: 'Exportar a PDF <i class="fas fa-file-pdf"></i>',
+        title: 'Lista de Detalles',
+        className: 'btn btn-danger',
+        exportOptions: {
+          columns: ':visible:not(.acciones-column)',
+        },
+        init: function (api, node, config) {
+          $(node).removeClass('dt-button')
+          $(node).prepend('<i class="fas fa-file-pdf"></i>')
+        },
+      },
+      {
+        extend: 'print',
+        text: 'Imprimir <i class="fas fa-print"></i>',
+        className: 'btn btn-warning',
+      },
+      {
+        extend: 'csv',
+        text: 'Exportar a CSV <i class="fas fa-file-csv"></i>',
+        className: 'btn btn-success',
+      },
+    ],
+    columnDefs: [
+      {
+        targets: [7],
+        className: 'acciones-column',
+      },
+    ],
+  })
 </script>
 {% endblock contenido %}

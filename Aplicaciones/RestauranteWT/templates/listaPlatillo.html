@@ -1,11 +1,14 @@
 {% extends "plantilla.html" %} {% block contenido %} {%load static %}
 <div class="container w-50 mt-4 mb-4">
-  <h4 class="text-center">Registrar Platillo</h4>
+  <h2 class="text-center">
+    Registrar Platillo <i class="fa-solid fa-plate-wheat"></i>
+  </h2>
   <form
     class="border p-3 rounded-3"
     action="/guardarPlatillo/"
     method="POST"
     enctype="multipart/form-data"
+    id="formPlatillo"
   >
     {% csrf_token %}
     <div class="row">
@@ -87,18 +90,21 @@
     </div>
     <center class="mt-2">
       <button type="submit" name="button" class="btn btn-outline-primary">
-        Guardar</button
+        Guardar <i class="fa-regular fa-floppy-disk"></i></button
       >&nbsp;&nbsp;
       <button type="reset" name="button" class="btn btn-outline-danger">
-        Cancelar
+        Cancelar <i class="fa-regular fa-window-close"></i>
       </button>
     </center>
   </form>
 </div>
 <center class="mt-4 mb-4">
   <div class="container table-responsive">
-    <h4 class="text-center">Lista de Platillos</h4>
-    <table class="table table-striped table-bordered table-hover">
+    <h2 class="text-center">Lista de Platillos</h2>
+    <table
+      class="table table-striped table-bordered table-hover"
+      id="tbPlatillo"
+    >
       <thead>
         <tr class="table-dark">
           <th class="text-center">ID</th>
@@ -136,15 +142,15 @@
             <a
               href="/editarPlatillo/{{platillo.idPlatillo_wt}}"
               class="btn btn-outline-info m-1"
-              >Editar</a
-            >
+              >Editar <i class="fa-regular fa-pen-to-square"></i
+            ></a>
             <a
               href="javascript:void(0);"
               type="button"
               class="btn btn-outline-warning m-1"
               onclick="eliminarPlatillo('/eliminarPlatillo/{{platillo.idPlatillo_wt}}')"
-              >Eliminar</a
-            >
+              >Eliminar <i class="fa-solid fa-trash"></i
+            ></a>
           </td>
         </tr>
         {% endfor %}
@@ -182,5 +188,93 @@
       ],
     })
   }
+</script>
+<script>
+  $('#formPlatillo').validate({
+    rules: {
+      idPlatillo_wt: {
+        required: true,
+      },
+      nombre_wt: {
+        required: true,
+      },
+      aderezos_wt: {
+        required: true,
+      },
+      descripcion_wt: {
+        required: true,
+      },
+      imagen_wt: {
+        required: true,
+      },
+      idTipo_wt: {
+        required: true,
+      },
+    },
+    messages: {
+      idPlatillo_wt: {
+        required: 'Este campo es obligatorio',
+      },
+      nombre_wt: {
+        required: 'Este campo es obligatorio',
+      },
+      aderezos_wt: {
+        required: 'Este campo es obligatorio',
+      },
+      descripcion_wt: {
+        required: 'Este campo es obligatorio',
+      },
+      imagen_wt: {
+        required: 'Este campo es obligatorio',
+      },
+      idTipo_wt: {
+        required: 'Este campo es obligatorio',
+      },
+    },
+  })
+</script>
+<script>
+  let table = $('#tbPlatillo').DataTable({
+    searching: true,
+    fixedHeader: true,
+    paging: true,
+    info: true,
+    pageLength: 5,
+    language: {
+      url: 'https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json',
+    },
+    dom: 'Bfrtip',
+    buttons: [
+      {
+        extend: 'pdfHtml5',
+        text: 'Exportar a PDF <i class="fas fa-file-pdf"></i>',
+        title: 'Detalles de los platillos',
+        className: 'btn btn-danger',
+        exportOptions: {
+          columns: ':visible:not(.acciones-column)',
+        },
+        init: function (api, node, config) {
+          $(node).removeClass('dt-button')
+          $(node).prepend('<i class="fas fa-file-pdf"></i>')
+        },
+      },
+      {
+        extend: 'print',
+        text: 'Imprimir <i class="fas fa-print"></i>',
+        className: 'btn btn-warning',
+      },
+      {
+        extend: 'csv',
+        text: 'Exportar a CSV <i class="fas fa-file-csv"></i>',
+        className: 'btn btn-success',
+      },
+    ],
+    columnDefs: [
+      {
+        targets: [6],
+        className: 'acciones-column',
+      },
+    ],
+  })
 </script>
 {% endblock contenido %}
