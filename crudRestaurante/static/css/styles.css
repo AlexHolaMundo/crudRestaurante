@@ -22,13 +22,18 @@ body {
   height: 75px;
   gap: 10px;
   text-decoration: none;
-  color: #000;
+  color: #111111;
   font-size: 20px;
   text-align: center;
   margin: 10px;
   border-radius: 15px 0 15px 0;
-  background-color: aqua;
+  background-color: #f8a000;
   padding: 10px;
+}
+.botones-home:hover {
+  background-color: #d18a0a;
+  color: #000000;
+  transition: 0.5s;
 }
 .navbar {
   position: fixed;
@@ -38,7 +43,7 @@ body {
   z-index: 1000;
 }
 .footer {
-  background-color: #000;
+  background-color: #212529;
   color: #fff;
   padding: 10px !important;
   position: fixed;
@@ -54,7 +59,7 @@ body {
 }
 
 .footer .col-md-4 {
-  text-align: center; /* Centra el contenido de cada columna */
+  text-align: center;
 }
 
 .footer h4 {
