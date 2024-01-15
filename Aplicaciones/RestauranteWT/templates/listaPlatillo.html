@@ -48,13 +48,12 @@
           <textarea
             type="text"
             required
-            class="form-control m-1"
+            class="form-control"
             placeholder="Ej. Hamburguesa con doble queso y mantequilla"
             value=""
             name="descripcion_wt"
             id="descripcion_wt"
-          >
-          </textarea>
+          ></textarea>
         </div>
       </div>
     </div>
@@ -110,7 +109,7 @@
           <th class="text-center">ID</th>
           <th class="text-center">Nombre</th>
           <th class="text-center">Aderezo</th>
-          <th class="text-center">Descripcion</th>
+          <th class="text-center w-25">Descripcion</th>
           <th class="text-center">Imagen</th>
           <th class="text-center">Tipo</th>
           <th class="text-center">Acciones</th>
@@ -122,7 +121,7 @@
           <td class="text-center">{{platillo.idPlatillo_wt}}</td>
           <td class="text-center">{{platillo.nombre_wt}}</td>
           <td class="text-center">{{platillo.aderezos_wt}}</td>
-          <td class="text-center">{{platillo.descripcion_wt}}</td>
+          <td class="text-justify w-25">{{platillo.descripcion_wt}}</td>
           <td class="text-center">
             {% if platillo.imagen_wt %}
             <a href="{{ platillo.imagen_wt.url }}" target="_blank">
