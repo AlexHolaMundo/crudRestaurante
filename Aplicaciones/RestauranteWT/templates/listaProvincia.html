@@ -158,6 +158,14 @@
   }
 </script>
 <script>
+  $.validator.addMethod(
+    'lettersonly',
+    function (value, element) {
+      return this.optional(element) || /^[a-zA-Z]+$/i.test(value)
+    },
+    'Por favor, ingrese solo letras'
+  )
+
   $('#formProvincia').validate({
     rules: {
       idProvincia_wt: {
@@ -168,6 +176,7 @@
         required: true,
         minlength: 3,
         maxlength: 50,
+        lettersonly: true,
       },
       codigoPostal_wt: {
         required: true,
@@ -177,6 +186,7 @@
         required: true,
         minlength: 3,
         maxlength: 50,
+        lettersonly: true,
       },
       habitantes_wt: {
         required: true,
@@ -192,6 +202,7 @@
         required: 'Por favor, ingrese un nombre',
         minlength: 'Por favor, ingrese al menos 3 caracteres',
         maxlength: 'Por favor, ingrese menos de 50 caracteres',
+        lettersonly: 'Este campo solo admite letras',
       },
       codigoPostal_wt: {
         required: 'Por favor, ingrese un codigo postal',

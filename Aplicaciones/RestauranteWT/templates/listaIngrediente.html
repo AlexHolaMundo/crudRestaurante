@@ -170,6 +170,13 @@
   }
 </script>
 <script>
+  $.validator.addMethod(
+    'lettersonly',
+    function (value, element) {
+      return this.optional(element) || /^[a-zA-Z]+$/i.test(value)
+    },
+    'Por favor, ingrese solo letras'
+  )
   $('#formIngrediente').validate({
     rules: {
       idIngrediente_wt: {
@@ -181,6 +188,7 @@
         required: true,
         minlength: 3,
         maxlength: 50,
+        letteronly: true,
       },
       tipo_wt: {
         required: true,
@@ -191,6 +199,7 @@
         required: true,
         minlength: 3,
         maxlength: 50,
+        lettersonly: true,
       },
       imagen_wt: {
         required: true,

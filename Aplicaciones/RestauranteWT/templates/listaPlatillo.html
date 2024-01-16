@@ -189,6 +189,13 @@
   }
 </script>
 <script>
+  $.validator.addMethod(
+    'lettersonly',
+    function (value, element) {
+      return this.optional(element) || /^[a-zA-Z]+$/i.test(value)
+    },
+    'Por favor, ingrese solo letras'
+  )
   $('#formPlatillo').validate({
     rules: {
       idPlatillo_wt: {
@@ -196,6 +203,7 @@
       },
       nombre_wt: {
         required: true,
+        lettersonly: true,
       },
       aderezos_wt: {
         required: true,

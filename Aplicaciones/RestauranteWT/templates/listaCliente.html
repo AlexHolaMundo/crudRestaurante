@@ -178,6 +178,13 @@
   }
 </script>
 <script>
+  $.validator.addMethod(
+    'lettersonly',
+    function (value, element) {
+      return this.optional(element) || /^[a-zA-Z]+$/i.test(value)
+    },
+    'Por favor, ingrese solo letras'
+  )
   $('#formCliente').validate({
     rules: {
       idCliente_wt: {
@@ -189,6 +196,7 @@
         required: true,
         minlength: 3,
         maxlength: 50,
+        lettersonly: true,
       },
       email_wt: {
         required: true,

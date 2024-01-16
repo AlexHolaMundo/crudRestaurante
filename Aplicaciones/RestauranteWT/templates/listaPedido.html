@@ -175,6 +175,13 @@
   }
 </script>
 <script>
+  $.validator.addMethod(
+    'lettersonly',
+    function (value, element) {
+      return this.optional(element) || /^[a-zA-Z]+$/i.test(value)
+    },
+    'Por favor, ingrese solo letras'
+  )
   $('#formPedido').validate({
     rules: {
       idPedido_wt: {
@@ -190,6 +197,7 @@
       },
       estado_wt: {
         required: true,
+        lettersonly: true,
       },
       metodo_pago_wt: {
         required: true,
