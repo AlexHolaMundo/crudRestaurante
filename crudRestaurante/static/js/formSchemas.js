@@ -4,10 +4,11 @@ $(document).ready(function () {
   $.validator.addMethod(
     'lettersonly',
     function (value, element) {
-      return this.optional(element) || /^[a-zA-Z]+$/i.test(value)
+      return this.optional(element) || /^[a-zA-Z\s]*$/.test(value)
     },
     'Por favor, ingrese solo letras'
   )
+
   $('#formCliente').validate({
     rules: {
       idCliente_wt: {
@@ -136,7 +137,7 @@ $(document).ready(function () {
   $.validator.addMethod(
     'lettersonly',
     function (value, element) {
-      return this.optional(element) || /^[a-zA-Z]+$/i.test(value)
+      return this.optional(element) || /^[a-zA-Z\s]*$/.test(value)
     },
     'Por favor, ingrese solo letras'
   )
@@ -211,7 +212,7 @@ $(document).ready(function () {
   $.validator.addMethod(
     'lettersonly',
     function (value, element) {
-      return this.optional(element) || /^[a-zA-Z]+$/i.test(value)
+      return this.optional(element) || /^[a-zA-Z\s]*$/.test(value)
     },
     'Por favor, ingrese solo letras'
   )
@@ -269,7 +270,7 @@ $(document).ready(function () {
   $.validator.addMethod(
     'lettersonly',
     function (value, element) {
-      return this.optional(element) || /^[a-zA-Z]+$/i.test(value)
+      return this.optional(element) || /^[a-zA-Z\s]*$/.test(value)
     },
     'Por favor, ingrese solo letras'
   )
@@ -323,7 +324,7 @@ $(document).ready(function () {
   $.validator.addMethod(
     'lettersonly',
     function (value, element) {
-      return this.optional(element) || /^[a-zA-Z]+$/i.test(value)
+      return this.optional(element) || /^[a-zA-Z\s]*$/.test(value)
     },
     'Por favor, ingrese solo letras'
   )
@@ -388,7 +389,7 @@ $(document).ready(function () {
   $.validator.addMethod(
     'lettersonly',
     function (value, element) {
-      return this.optional(element) || /^[a-zA-Z]+$/i.test(value)
+      return this.optional(element) || /^[a-zA-Z\s]*$/.test(value)
     },
     'Por favor, ingrese solo letras'
   )
@@ -472,7 +473,7 @@ $(document).ready(function () {
   $.validator.addMethod(
     'lettersonly',
     function (value, element) {
-      return this.optional(element) || /^[a-zA-Z]+$/i.test(value)
+      return this.optional(element) || /^[a-zA-Z\s]*$/.test(value)
     },
     'Por favor, ingrese solo letras'
   )
